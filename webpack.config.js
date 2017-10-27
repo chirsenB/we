@@ -39,13 +39,18 @@ module.exports = env => {
 				},
 				{ 
 					test: /\.(mp4|ogg|mp3|wav)$/, 
-					use: ['file-loader']
+					use: [{
+						loader: 'file-loader',
+						options: {
+							name: 'audio/[hash:8].[name].[ext]'
+						}
+					}]
 				}
 			]
 		},
 		plugins: [
 			new HtmlWebpackPlugin({
-				template: './index.html'
+				template: 'html-loader?attrs[]=img:src&attrs[]=source:src!' + path.join(__dirname, 'index.html')
 			}), new ExtractTextPlugin('test.css'), 
 			new UglifyJSPlugin()
 		],
