@@ -50,9 +50,10 @@ module.exports = env => {
 		},
 		plugins: [
 			new HtmlWebpackPlugin({
+				// 动态注入文件，html中的资源文件动态编译，注意设置attrs来应对不同文件，默认为img
 				template: 'html-loader?attrs[]=img:src&attrs[]=source:src!' + path.join(__dirname, 'index.html')
-			}), new ExtractTextPlugin('test.css'), 
-			new UglifyJSPlugin()
+			}), new ExtractTextPlugin('test.css'), // css提取
+			new UglifyJSPlugin() // 压缩
 		],
 		devtool: 'inline-source-map'
 	}
